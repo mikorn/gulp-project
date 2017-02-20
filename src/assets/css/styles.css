@@ -1,0 +1,14 @@
+.site-header {
+  background-color: #00f;
+  font-size: 17px;
+}
+.site-header-logo {
+  color: #fff;
+}
+.site-header-text {
+  color: #fff;
+}
+.site-footer {
+  background-color: #008000;
+  padding: 20px 0;
+}
