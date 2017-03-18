@@ -16,8 +16,8 @@ var gulp = require('gulp'), // Gulp
     uglify = require('gulp-uglify'); // Минификация JS-файлов
     
 // Подключение Browsersync:    
-var browserSync = require('browser-sync').create(), //
-    reload = browserSync.reload; //
+var browserSync = require('browser-sync').create(),
+    reload = browserSync.reload;
 
 // Пути для development-папки:
 var devDir = './src', // development-папка
