@@ -41,7 +41,7 @@ var devDir = './src', // development-папка
     jsVendorDest = devDir + '/assets/js', // Место сохранения результатов работы таска jsVendor
     fontsVendorSrc = [ // Исходник для таска fontsVendor
         devDir + '/vendor/bootstrap/dist/fonts/*.*', // Все файлы в папке fonts Bootstrap
-        devDir + '/vendor/font-awesome/fonts/*.*' // Все файлы в папке fonts Bootstrap
+        devDir + '/vendor/font-awesome/fonts/*.*' // Все файлы в папке fonts Font Awesome
     ],
     fontsVendorDest = devDir + '/assets/fonts'; // Место сохранения результатов работы таска fontsVendor
 
