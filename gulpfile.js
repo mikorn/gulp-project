@@ -157,7 +157,7 @@ gulp.task('jsVendor', function () {
     .pipe(gulp.dest(paths.vendor.js.dest)); // Сохранение минифицированного файла vendor.min.js в папку src/assets/js
 });
 
-// Таск по переносу содержимого папок fonts внешних приложений и плагинов
+// Таск по переносу содержимого папок fonts внешних приложений и плагинов:
 gulp.task('fontsVendor', function () {
   return gulp.src(paths.vendor.fonts.src) // Сбор содержимого папок fonts внешних приложений и плагинов
     .pipe(gulp.dest(paths.vendor.fonts.dest)); // Сохранение в папку src/assets/fonts
