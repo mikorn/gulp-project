@@ -1,9 +1,9 @@
 {
-  "name": "project",
+  "name": "shop",
   "description": "",
-  "main": "gulpfile.js",
+  "main": "index.js",
   "authors": [
-    "Mikhail Kornilov <m.kornilov@webmikorn.ru>"
+    "mikorn <info@webmikorn.ru>"
   ],
   "license": "ISC",
   "homepage": "",
@@ -15,9 +15,9 @@
     "tests"
   ],
   "devDependencies": {
-    "jquery": "^3.1.1",
+    "jquery": "^3.2.1",
+    "normalize-css": "normalize.css#^6.0.0",
     "bootstrap": "^3.3.7",
-    "normalize-css": "normalize.css#^5.0.0",
     "font-awesome": "^4.7.0"
   }
 }

@@ -22,7 +22,7 @@ var browserSync = require('browser-sync').create(),
 // Переменные, задающие пути для тасков:
 var paths = {
   dir: { // Директории
-    dev: './app', // development-папка (директория для разработки)
+    app: './app', // development-папка (директория для разработки)
     dist: './dist' // production-папка (директория для продакшн)
   },
   watch: { // Переменные, задающие пути для вотчера
@@ -96,7 +96,7 @@ var paths = {
 // Browsersync (автообновление браузера):
 gulp.task('serve', function() {
   browserSync.init({
-    server: paths.dir.dev,
+    server: paths.dir.app,
     browser: 'firefox'
   });
   gulp.watch(paths.watch.pug, gulp.series('html')); // Вотчер Pug
@@ -167,7 +167,7 @@ gulp.task('build', gulp.parallel('html', 'css', 'js', 'cssVendor', 'jsVendor', '
 
 // Таск предварительной очистки (удаления) production-папки dist:
 gulp.task('clean', function() {
-  return del(paths.app); // удаление distribution-папки
+  return del(paths.dir.dist); // удаление distribution-папки
 });
 
 // Обработка изображений и перенос их из development-папки в production:
@@ -178,7 +178,7 @@ gulp.task('img', function() {
 });
 
 // Формирование папки для production:
-gulp.task('dist', gulp.series('clean', 'img'), function () {
+gulp.task('dist', function () {
   var htmlDist = gulp.src(paths.dist.html.src)
       .pipe(gulp.dest(paths.dist.html.dest)); // Перенос HTML-файлов
   var cssDist = gulp.src(paths.dist.css.src)
@@ -190,5 +190,8 @@ gulp.task('dist', gulp.series('clean', 'img'), function () {
   return htmlDist, cssDist, jsDist, fontsDist;
 });
 
-// Запуск сборки:
+// Запуск сборки для разработки:
 gulp.task('default', gulp.series('build', 'serve'));
+
+// Запуск сборки для продакшн:
+gulp.task('public', gulp.series('clean', 'img', 'dist'));

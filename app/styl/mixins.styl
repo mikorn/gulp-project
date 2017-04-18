@@ -1,8 +1,5 @@
 @import "vars.styl"
 
-border-radius(radius)
-    -webkit-border-radius radius
-    -moz-border-radius radius
-    -ms-border-radius radius
-    -o-border-radius radius
-    border-radius radius
+responsive(screenWidth)
+	@media only screen and (max-width: screenWidth)
+		{block}
