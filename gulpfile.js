@@ -27,8 +27,8 @@ var paths = {
   },
   watch: { // Переменные, задающие пути для вотчера
     pug: './app/pug/**/*.pug', // Вотчер для Pug-файлов
-    styl: './app/**/*.styl', // Вотчер для Stylus-файлов
-    js: './app/**/*.js', // Вотчер для JS-файлов
+    styl: ['./app/blocks/**/*.styl', './app/styl/**/*.styl'], // Вотчер для Stylus-файлов
+    js: './app/blocks/**/*.js', // Вотчер для JS-файлов
     img: './app/assets/img/**/*.*' // Вотчер для изображений
   },
   app: {
