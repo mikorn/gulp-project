@@ -108,7 +108,7 @@ gulp.task('serve', function() {
 
 // Таск для работы Pug (преобразование Pug в HTML):
 gulp.task('html', function () {
-  return gulp.src(paths.app.html.src) // Исходник таска pug (все Pug-файлы в папке src/pug/pages)
+  return gulp.src(paths.app.html.src) // Исходник таска pug (все Pug-файлы в папке app/pug/pages)
     .pipe(plumber()) // Обработка ошибок при работе таска pug
     .pipe(pug({pretty: true})) // Преобразование Pug в HTML
     .pipe(gulp.dest(paths.app.html.dest)) // Сохранение HTML-файлов в папке src
@@ -124,7 +124,7 @@ gulp.task('css', function () {
     .pipe(autoprefixer()) // Добавление префиксов
     .pipe(rename({suffix: '.min'})) // Переименование styles.css в styles.min.css
     .pipe(csso()) // Минификация файла styles.min.css
-    .pipe(gulp.dest(paths.app.css.dest)) // Сохранение минифицированного файла styles.min.css в папку src/assets/css
+    .pipe(gulp.dest(paths.app.css.dest)) // Сохранение минифицированного файла styles.min.css в папку app/assets/css
     .pipe(sourcemaps.write()) // Написание исходных файлов
     .pipe(browserSync.stream()); // Browsersync
 });
@@ -146,7 +146,7 @@ gulp.task('cssVendor', function () {
   return gulp.src(paths.vendor.css.src) // CSS-файлы внешних приложений и плагинов
     .pipe(concat('vendor.min.css')) // Конкатенация (объединение) CSS-файлов в один файл vendor.min.css
     .pipe(csso()) // Минификация файла vendor.min.css
-    .pipe(gulp.dest(paths.vendor.css.dest)); // Сохранение минифицированного файла vendor.min.css в папку src/assets/css
+    .pipe(gulp.dest(paths.vendor.css.dest)); // Сохранение минифицированного файла vendor.min.css в папку app/assets/css
 });
 
 // Таск по конкатенации и минификации JS-файлов внешних приложений и плагинов:
@@ -154,13 +154,13 @@ gulp.task('jsVendor', function () {
   return gulp.src(paths.vendor.js.src) // JS-файлы внешних приложений и плагинов
     .pipe(concat('vendor.min.js')) // Конкатенация (объединение) JS-файлов в один файл vendor.min.js
     .pipe(uglify()) // Минификация файла vendor.min.js
-    .pipe(gulp.dest(paths.vendor.js.dest)); // Сохранение минифицированного файла vendor.min.js в папку src/assets/js
+    .pipe(gulp.dest(paths.vendor.js.dest)); // Сохранение минифицированного файла vendor.min.js в папку app/assets/js
 });
 
 // Таск по переносу содержимого папок fonts внешних приложений и плагинов:
 gulp.task('fontsVendor', function () {
   return gulp.src(paths.vendor.fonts.src) // Сбор содержимого папок fonts внешних приложений и плагинов
-    .pipe(gulp.dest(paths.vendor.fonts.dest)); // Сохранение в папку src/assets/fonts
+    .pipe(gulp.dest(paths.vendor.fonts.dest)); // Сохранение в папку app/assets/fonts
 });
 
 gulp.task('build', gulp.parallel('html', 'css', 'js', 'cssVendor', 'jsVendor', 'fontsVendor'));
