@@ -111,7 +111,7 @@ gulp.task('html', function () {
   return gulp.src(paths.app.html.src) // Исходник таска pug (все Pug-файлы в папке app/pug/pages)
     .pipe(plumber()) // Обработка ошибок при работе таска pug
     .pipe(pug({pretty: true})) // Преобразование Pug в HTML
-    .pipe(gulp.dest(paths.app.html.dest)) // Сохранение HTML-файлов в папке src
+    .pipe(gulp.dest(paths.app.html.dest)) // Сохранение HTML-файлов в папке app
     .pipe(browserSync.stream()); // Browsersync
 });
 
