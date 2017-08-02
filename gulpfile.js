@@ -1,21 +1,20 @@
 'use strict';
 
-var gulp = require('gulp'),
-    autoprefixer = require('gulp-autoprefixer'),
-    concat = require('gulp-concat'),
-    csso = require('gulp-csso'),
-    del = require('del'),
-    imagemin = require('gulp-imagemin'),
-    plumber = require('gulp-plumber'),
-    pngquant = require('imagemin-pngquant'),
-    pug = require('gulp-pug'),
-    rename = require('gulp-rename'),
-    stylus = require('gulp-stylus'),
-    uglify = require('gulp-uglify');
+// Подключение плагинов через переменные (connection of plugins through variables):
+var gulp = require('gulp'), // Gulp
+    autoprefixer = require('gulp-autoprefixer'), // Добавление вендорных префиксов (adding of vendor prefixers)
+    concat = require('gulp-concat'), // Объединение файлов (files merger)
+    csso = require('gulp-csso'), // Минификация CSS-файлов (minification of CSS files)
+    del = require('del'), // Удаление папок и файлов (delete of folders and files)
+    imagemin = require('gulp-imagemin'), // Оптимизация изображений (images optimization)
+    plumber = require('gulp-plumber'), // Обработка ошибок (error handling)
+    pngquant = require('imagemin-pngquant'), // Оптимизация PNG-изображений (PNG images optimization)
+    pug = require('gulp-pug'), // Pug
+    rename = require('gulp-rename'), // Переименование файлов (files rename)
+    stylus = require('gulp-stylus'), // Stylus
+    uglify = require('gulp-uglify'); // Минификация JS-файлов (minification of JS files)
 
-var browserSync = require('browser-sync').create(),
-    reload = browserSync.reload;
-
+// Задание путей к используемым файлам и папкам (paths to folders and files):
 var paths = {
   dir: {
     app: './app',
@@ -96,10 +95,14 @@ var paths = {
   }
 }
 
+// Подключение Browsersync (connection of Browsersync):
+var browserSync = require('browser-sync').create(),
+    reload = browserSync.reload;
+
+// Таск для работы Browsersync, автообновление браузера (Browsersync task, autoreload of browser):
 gulp.task('serve', function() {
   browserSync.init({
-    server: './app',
-    browser: 'firefox'
+    server: './app'
   });
   gulp.watch(paths.watch.html, gulp.series('html'));
   gulp.watch(paths.watch.css, gulp.series('cssCommon'));
@@ -107,6 +110,7 @@ gulp.task('serve', function() {
   gulp.watch('*.html').on('change', reload);
 });
 
+// Таск для работы Pug, преобразование Pug в HTML (Pug to HTML conversion task):
 gulp.task('html', function () {
   return gulp.src(paths.app.html.src)
     .pipe(plumber())
@@ -115,6 +119,7 @@ gulp.task('html', function () {
     .pipe(browserSync.stream());
 });
 
+// Таск для преобразования Stylus-файлов в CSS (Stylus to CSS conversion):
 gulp.task('cssCommon', function() {
   return gulp.src(paths.app.common.css.src)
     .pipe(plumber())
@@ -128,6 +133,7 @@ gulp.task('cssCommon', function() {
     .pipe(browserSync.stream());
 });
 
+// Таск для объединения и минификации пользовательских JS-файлов (task for merger and minification custom JS files)
 gulp.task('jsCommon', function() {
   return gulp.src(paths.app.common.js.src)
     .pipe(plumber())
@@ -139,6 +145,7 @@ gulp.task('jsCommon', function() {
     .pipe(browserSync.stream());
 });
 
+// Таск для объединения и минификации CSS-файлов внешних библиотек (task for merger and minification CSS files of libraries, plugins and frameworks)
 gulp.task('cssVendor', function () {
   return gulp.src(paths.app.vendor.css.src)
     .pipe(concat('vendor.min.css'))
@@ -146,6 +153,7 @@ gulp.task('cssVendor', function () {
     .pipe(gulp.dest(paths.app.vendor.css.dest));
 });
 
+// Таск для объединения и минификации JS-файлов внешних библиотек (task for merger and minification JS files of libraries, plugins and frameworks)
 gulp.task('jsVendor', function () {
   return gulp.src(paths.app.vendor.js.src)
     .pipe(concat('vendor.min.js'))
@@ -153,21 +161,25 @@ gulp.task('jsVendor', function () {
     .pipe(gulp.dest(paths.app.vendor.js.dest));
 });
 
+// Таск для объединения папок fonts внешних библиотек (task for merger fonts folders of libraries, plugins and frameworks)
 gulp.task('fontsVendor', function () {
   return gulp.src(paths.app.vendor.fonts.src)
     .pipe(gulp.dest(paths.app.vendor.fonts.dest));
 });
 
+// Таск для предварительной очистки (удаления) production-папки (task for delete of production folder dist):
 gulp.task('clean', function() {
   return del(paths.dir.dist);
 });
 
+// Таск для обработки изображений (images optimization task):
 gulp.task('img', function() {
   return gulp.src(paths.img.src)
     .pipe(imagemin({use: [pngquant()]}))
     .pipe(gulp.dest(paths.img.dest));
 });
 
+// Таск для формирования production-папки (task for creating of production folder dist):
 gulp.task('dist', function () {
   var htmlDist = gulp.src(paths.dist.html.src)
       .pipe(gulp.dest(paths.dist.html.dest));
@@ -180,8 +192,11 @@ gulp.task('dist', function () {
   return htmlDist, cssDist, jsDist, fontsDist;
 });
 
+// Таск для сборки (build task):
 gulp.task('build', gulp.parallel('html', 'cssCommon', 'jsCommon', 'cssVendor', 'jsVendor', 'fontsVendor'));
 
+// Таск для разработки (development task):
 gulp.task('default', gulp.series('build', 'serve'));
 
+// Таск для production (production task):
 gulp.task('public', gulp.series('clean', 'img', 'dist'));
