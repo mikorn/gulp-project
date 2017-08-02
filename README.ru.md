@@ -16,7 +16,7 @@
 <p>1. Клонирование проекта:</p>
 <pre>git clone https://github.com/mikorn/gulp-project.git --depth 1 my-gulp-project</pre>
 <p>Далее необходимо перейти в папку проекта:</p>
-<pre>cd my-email-gulp</pre>
+<pre>cd my-gulp-project</pre>
 <p>2. Установка npm-зависимостей:</p>
 <pre>npm install</pre>
 <p>Или:</p>
