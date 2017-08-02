@@ -1,12 +1,21 @@
 {
-  "name": "shop",
+  "name": "gulp-project",
+  "description": "Template for website development with Gulp",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "homepage": "https://webmikorn.ru",
+  "author": "Mikorn",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mikorn/gulp-project.git"
+  },
+  "engines": {
+    "node": ">=4"
+  },
   "devDependencies": {
     "browser-sync": "^2.18.8",
     "del": "^2.2.2",
@@ -21,7 +30,6 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-stylus": "^2.6.0",
     "gulp-uglify": "^2.1.2",
-    "imagemin-pngquant": "^5.0.0"
-  },
-  "description": ""
+    "imagemin-pngquant": "^5.0.1"
+  }
 }
