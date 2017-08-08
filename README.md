@@ -1,3 +1,4 @@
+<p>Русская версия в файле README.ru.md</p>
 <h1>Gulp project example for website development</h1>
 <h2>Description</h2>
 <p>In this repository there is a template for website development with Gulp.</p>
@@ -102,6 +103,8 @@ project/
 |-----------/services.html
 |------/node_modules/
 </pre>
+<p>Default installed jQuery, Normalize.css, Bootstrap, Font Awesome.</p>
+<p>This list changed with Bower and further to make the appropriate changes in gulpfile.js. And reload Gulp.</p>
 <p>For development need to run Gulp:</p>
 <pre>gulp</pre>
 <p>All development happens in folder app.</p>

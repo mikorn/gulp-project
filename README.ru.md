@@ -102,6 +102,8 @@ project/
 |-----------/services.html
 |------/node_modules/
 </pre>
+<p>По умолчанию из внешних библиотек установлены jQuery, Normalize.css, Bootstrap, Font Awesome.</p>
+<p>Данный список можно изменить с помощью Bower и внести соответствующие изменения в gulpfile.js. Далее перезапустить Gulp.</p>
 <p>Для разработки необходимо запустить Gulp:</p>
 <pre>gulp</pre>
 <p>Вся разработка ведется в папке app.</p>
