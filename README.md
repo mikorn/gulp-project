@@ -1,4 +1,4 @@
-<p>Русская версия в файле README.ru.md</p>
+<p>Русская версия находится в файле README.ru.md.</p>
 <h1>Gulp project example for website development</h1>
 <h2>Description</h2>
 <p>In this repository there is a template for website development with Gulp.</p>
