@@ -21,8 +21,8 @@ var paths = {
     dist: './dist'
   },
   watch: {
-    html: './app/pug/**/*.pug',
-    css: [
+    pug: './app/pug/**/*.pug',
+    styl: [
       './app/blocks/**/*.styl',
       './app/config/**/*.styl'
     ],
@@ -104,8 +104,8 @@ gulp.task('serve', function() {
   browserSync.init({
     server: './app'
   });
-  gulp.watch(paths.watch.html, gulp.series('html'));
-  gulp.watch(paths.watch.css, gulp.series('cssCommon'));
+  gulp.watch(paths.watch.pug, gulp.series('html'));
+  gulp.watch(paths.watch.styl, gulp.series('cssCommon'));
   gulp.watch(paths.watch.js, gulp.series('jsCommon'));
   gulp.watch('*.html').on('change', reload);
 });
