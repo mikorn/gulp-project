@@ -1,36 +1,30 @@
 {
-  "name": "gulp-project",
-  "description": "Template for website development with Gulp",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "mikorn-project",
+  "version": "3.0.0",
+  "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Mikorn",
-  "homepage": "https://webmikorn.ru",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mikorn/gulp-project.git"
-  },
-  "engines": {
-    "node": ">=4"
-  },
+  "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.18.8",
     "del": "^2.2.2",
     "gulp": "github:gulpjs/gulp#4.0",
-    "gulp-autoprefixer": "^3.1.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean-css": "^3.9.4",
     "gulp-concat": "^2.6.1",
-    "gulp-csso": "^3.0.0",
-    "gulp-imagemin": "^3.2.0",
+    "gulp-debug": "^3.2.0",
+    "gulp-imagemin": "^4.1.0",
     "gulp-plumber": "^1.1.0",
-    "gulp-pug": "^3.3.0",
-    "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^2.6.0",
+    "gulp-pug": "^4.0.1",
+    "gulp-sourcemaps": "^2.6.4",
     "gulp-stylus": "^2.6.0",
     "gulp-uglify": "^2.1.2",
-    "imagemin-pngquant": "^5.0.1",
-    "pug": "^2.0.0-rc.1"
-  }
+    "imagemin-pngquant": "^5.1.0"
+  },
+  "dependencies": {
+    "npm": "^6.0.1"
+  },
+  "description": ""
 }

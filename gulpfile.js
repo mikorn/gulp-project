@@ -1,43 +1,53 @@
 'use strict';
 
-// Подключение плагинов через переменные (connection of plugins through variables):
-var gulp = require('gulp'), // Gulp
-    autoprefixer = require('gulp-autoprefixer'), // Добавление вендорных префиксов (adding of vendor prefixers)
-    concat = require('gulp-concat'), // Объединение файлов (files merger)
-    csso = require('gulp-csso'), // Минификация CSS-файлов (minification of CSS files)
-    del = require('del'), // Удаление папок и файлов (delete of folders and files)
-    imagemin = require('gulp-imagemin'), // Оптимизация изображений (images optimization)
-    plumber = require('gulp-plumber'), // Обработка ошибок (error handling)
-    pngquant = require('imagemin-pngquant'), // Оптимизация PNG-изображений (PNG images optimization)
-    pug = require('gulp-pug'), // Pug
-    rename = require('gulp-rename'), // Переименование файлов (files rename)
-    stylus = require('gulp-stylus'), // Stylus
-    uglify = require('gulp-uglify'); // Минификация JS-файлов (minification of JS files)
+var gulp = require( 'gulp' ),
+    autoprefixer = require( 'gulp-autoprefixer' ),
+    cleanCSS = require( 'gulp-clean-css' ),
+    concat = require( 'gulp-concat' ),
+    debug = require( 'gulp-debug' ),
+    del = require( 'del' ),
+    imagemin = require( 'gulp-imagemin' ),
+    plumber = require( 'gulp-plumber' ),
+    pngquant = require( 'imagemin-pngquant' ),
+    pug = require( 'gulp-pug' ),
+    sourcemaps = require( 'gulp-sourcemaps' ),
+    stylus = require( 'gulp-stylus' ),
+    uglify = require( 'gulp-uglify' );
 
-// Задание путей к используемым файлам и папкам (paths to folders and files):
+var browserSync = require('browser-sync').create(),
+    reload = browserSync.reload;
+
 var paths = {
-  dir: {
-    app: './app',
-    dist: './dist'
+  clean: {
+    app: [
+      './app/*.html',
+      './app/libs',
+      './app/assets/css',
+      './app/assets/js'
+    ],
+    dist: [
+      './dist/assets',
+      './dist/libs'
+    ]
   },
   watch: {
-    pug: './app/pug/**/*.pug',
-    styl: [
+    html: './app/pug/**/*.pug',
+    css: [
       './app/blocks/**/*.styl',
-      './app/config/**/*.styl'
-    ],
-    js: './app/blocks/**/*.js'
+      './app/config/**/*.styl' ],
+    js: './app/blocks/**/*.js',
   },
   app: {
     html: {
       src: './app/pug/pages/*.pug',
       dest: './app'
     },
-    common: {
+    custom: {
       css: {
         src: [
-          './app/config/variables.styl',
+          './app/config/vars.styl',
           './app/config/mixins.styl',
+          './app/config/reset.styl',
           './app/blocks/**/*.styl'
         ],
         dest: './app/assets/css'
@@ -47,27 +57,54 @@ var paths = {
         dest: './app/assets/js'
       }
     },
-    vendor: {
-      css: {
+    libs: {
+      jquery: {
         src: [
-          './app/vendor/normalize-css/normalize.css',
-          './app/vendor/bootstrap/dist/css/bootstrap.min.css',
-          './app/vendor/font-awesome/css/font-awesome.min.css'
+          './app/bower_components/jquery/dist/jquery.min.js',
+          './app/bower_components/jquery/LICENSE.txt'
         ],
-        dest: './app/assets/css'
+        dest: './app/libs/jquery'
       },
-      js: {
+      bootstrap: {
         src: [
-          './app/vendor/jquery/dist/jquery.min.js',
-          './app/vendor/bootstrap/dist/js/bootstrap.min.js'
+          './app/bower_components/bootstrap/dist/css/bootstrap.min.css',
+          './app/bower_components/bootstrap/dist/js/bootstrap.min.js',
+          './app/bower_components/bootstrap/LICENSE'
         ],
-        dest: './app/assets/js'
+        dest: './app/libs/bootstrap'
       },
-      fonts: {
+      fontAwesome: {
         src: [
-          './app/vendor/font-awesome/fonts/*.*'
+          './app/bower_components/font-awesome/web-fonts-with-css/css',
+          './app/bower_components/font-awesome/web-fonts-with-css/webfonts',
+          './app/bower_components/font-awesome/LICENSE.txt',
         ],
-        dest: './app/assets/fonts'
+        dest: './app/libs/font-awesome'
+      },
+      animateCSS: {
+        src: [
+          './app/bower_components/animate.css/animate.min.css',
+          './app/bower_components/animate.css/LICENSE'
+        ],
+        dest: './app/libs/animate.css'
+      },
+      wow: {
+        src: [
+          './app/bower_components/wow/dist/wow.min.js',
+          './app/bower_components/wow/LICENSE-MIT'
+        ],
+        dest: './app/libs/wow'
+      },
+      parallaxJS: {
+        src: [
+          './app/bower_components/parallax.js/parallax.min.js',
+          './app/bower_components/parallax.js/LICENSE'
+        ],
+        dest: './app/libs/parallax.js'
+      },
+      pageScroll2ID: {
+        src: './app/bower_components/page-scroll-to-id/jquery.malihu.PageScroll2id.js',
+        dest: './app/libs/page-scroll-to-id'
       }
     }
   },
@@ -76,127 +113,124 @@ var paths = {
     dest: './dist/assets/images'
   },
   dist: {
-    html: {
-      src: './app/*.html',
-      dest: './dist'
-    },
     css: {
-      src: './app/assets/css/*.min.css',
+      src: './app/assets/css/custom.min.css',
       dest: './dist/assets/css'
     },
     js: {
-      src: './app/assets/js/*.min.js',
+      src: './app/assets/js/custom.min.js',
       dest: './dist/assets/js'
     },
-    fonts: {
-      src: './app/assets/fonts/*.*',
-      dest: './dist/assets/fonts'
+    libs: {
+      src: './app/libs/**/*.*',
+      dest: './dist/libs'
     }
   }
 }
 
-// Подключение Browsersync (connection of Browsersync):
-var browserSync = require('browser-sync').create(),
-    reload = browserSync.reload;
-
-// Таск для работы Browsersync, автообновление браузера (Browsersync task, autoreload of browser):
-gulp.task('serve', function() {
-  browserSync.init({
-    server: './app'
-  });
-  gulp.watch(paths.watch.pug, gulp.series('html'));
-  gulp.watch(paths.watch.styl, gulp.series('cssCommon'));
-  gulp.watch(paths.watch.js, gulp.series('jsCommon'));
-  gulp.watch('*.html').on('change', reload);
+gulp.task( 'serve', function() {
+    browserSync.init( { server: './app' } );
+    gulp.watch( paths.watch.html, gulp.series( 'html' ) );
+    gulp.watch( paths.watch.css, gulp.series( 'css' ) );
+    gulp.watch( paths.watch.js, gulp.series( 'js' ) );
+    gulp.watch( paths.watch.html ).on( 'change', reload );
 });
 
-// Таск для работы Pug, преобразование Pug в HTML (Pug to HTML conversion task):
-gulp.task('html', function () {
-  return gulp.src(paths.app.html.src)
-    .pipe(plumber())
-    .pipe(pug({pretty: true}))
-    .pipe(gulp.dest(paths.app.html.dest))
-    .pipe(browserSync.stream());
+gulp.task( 'html', function() {
+  return gulp.src( paths.app.html.src )
+    .pipe( plumber() )
+    .pipe( pug( { pretty: true } ) )
+    .pipe( gulp.dest( paths.app.html.dest ) )
+    .pipe(browserSync.stream() );
 });
 
-// Таск для преобразования Stylus-файлов в CSS (Stylus to CSS conversion):
-gulp.task('cssCommon', function() {
-  return gulp.src(paths.app.common.css.src)
-    .pipe(plumber())
-    .pipe(concat('common.styl'))
-    .pipe(stylus())
-    .pipe(autoprefixer())
-    .pipe(gulp.dest(paths.app.common.css.dest))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(csso())
-    .pipe(gulp.dest(paths.app.common.css.dest))
-    .pipe(browserSync.stream());
+gulp.task( 'css', function() {
+  return gulp.src( paths.app.custom.css.src )
+    .pipe( plumber() )
+    .pipe( sourcemaps.init() )
+    .pipe( concat( 'custom.min.styl' ) )
+    .pipe( stylus() )
+    .pipe( autoprefixer() )
+    .pipe( cleanCSS() )
+    .pipe( sourcemaps.write() )
+    .pipe( gulp.dest( paths.app.custom.css.dest ) )
+    .pipe( browserSync.stream() );
 });
 
-// Таск для объединения и минификации пользовательских JS-файлов (task for merger and minification custom JS files)
-gulp.task('jsCommon', function() {
-  return gulp.src(paths.app.common.js.src)
-    .pipe(plumber())
-    .pipe(concat('common.js'))
-    .pipe(gulp.dest(paths.app.common.js.dest))
-    .pipe(rename({suffix: '.min'}))
-    .pipe(uglify())
-    .pipe(gulp.dest(paths.app.common.js.dest))
-    .pipe(browserSync.stream());
+gulp.task( 'js', function() {
+  return gulp.src( paths.app.custom.js.src )
+    .pipe( plumber() )
+    .pipe( sourcemaps.init() )
+    .pipe( concat( 'custom.min.js' ) )
+    .pipe( uglify() )
+    .pipe( sourcemaps.write() )
+    .pipe( gulp.dest( paths.app.custom.js.dest ) )
+    .pipe( browserSync.stream() );
 });
 
-// Таск для объединения и минификации CSS-файлов внешних библиотек (task for merger and minification CSS files of libraries, plugins and frameworks)
-gulp.task('cssVendor', function () {
-  return gulp.src(paths.app.vendor.css.src)
-    .pipe(concat('vendor.min.css'))
-    .pipe(csso())
-    .pipe(gulp.dest(paths.app.vendor.css.dest));
+gulp.task( 'jquery', function() {
+  return gulp.src( paths.app.libs.jquery.src )
+    .pipe( gulp.dest( paths.app.libs.jquery.dest ) );
 });
 
-// Таск для объединения и минификации JS-файлов внешних библиотек (task for merger and minification JS files of libraries, plugins and frameworks)
-gulp.task('jsVendor', function () {
-  return gulp.src(paths.app.vendor.js.src)
-    .pipe(concat('vendor.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest(paths.app.vendor.js.dest));
+gulp.task( 'bootstrap', function() {
+  return gulp.src( paths.app.libs.bootstrap.src )
+    .pipe( gulp.dest( paths.app.libs.bootstrap.dest ) );
 });
 
-// Таск для объединения папок fonts внешних библиотек (task for merger fonts folders of libraries, plugins and frameworks)
-gulp.task('fontsVendor', function () {
-  return gulp.src(paths.app.vendor.fonts.src)
-    .pipe(gulp.dest(paths.app.vendor.fonts.dest));
+gulp.task( 'fontAwesome', function () {
+  return gulp.src( paths.app.libs.fontAwesome.src )
+    .pipe( gulp.dest( paths.app.libs.fontAwesome.dest ) );
 });
 
-// Таск для предварительной очистки (удаления) production-папки (task for delete of production folder dist):
-gulp.task('clean', function() {
-  return del(paths.dir.dist);
+gulp.task( 'animateCSS', function() {
+  return gulp.src( paths.app.libs.animateCSS.src )
+    .pipe( gulp.dest( paths.app.libs.animateCSS.dest ) );
 });
 
-// Таск для обработки изображений (images optimization task):
-gulp.task('img', function() {
-  return gulp.src(paths.img.src)
-    .pipe(imagemin({use: [pngquant()]}))
-    .pipe(gulp.dest(paths.img.dest));
+gulp.task( 'wow', function() {
+  return gulp.src( paths.app.libs.wow.src )
+    .pipe( gulp.dest( paths.app.libs.wow.dest ) );
 });
 
-// Таск для формирования production-папки (task for creating of production folder dist):
-gulp.task('dist', function () {
-  var htmlDist = gulp.src(paths.dist.html.src)
-      .pipe(gulp.dest(paths.dist.html.dest));
-  var cssDist = gulp.src(paths.dist.css.src)
-      .pipe(gulp.dest(paths.dist.css.dest));
-  var jsDist = gulp.src(paths.dist.js.src)
-      .pipe(gulp.dest(paths.dist.js.dest));
-  var fontsDist = gulp.src(paths.dist.fonts.src)
-      .pipe(gulp.dest(paths.dist.fonts.dest));
-  return htmlDist, cssDist, jsDist, fontsDist;
+gulp.task( 'parallaxJS', function() {
+  return gulp.src( paths.app.libs.parallaxJS.src )
+    .pipe( gulp.dest( paths.app.libs.parallaxJS.dest ) );
 });
 
-// Таск для сборки (build task):
-gulp.task('build', gulp.parallel('html', 'cssCommon', 'jsCommon', 'cssVendor', 'jsVendor', 'fontsVendor'));
+gulp.task( 'pageScroll2ID', function() {
+  return gulp.src( paths.app.libs.pageScroll2ID.src )
+    .pipe( gulp.dest( paths.app.libs.pageScroll2ID.dest ) );
+});
 
-// Таск для разработки (development task):
-gulp.task('default', gulp.series('build', 'serve'));
+gulp.task( 'cleanApp', function() {
+  return del( paths.clean.app );
+});
 
-// Таск для production (production task):
-gulp.task('public', gulp.series('clean', 'img', 'dist'));
+gulp.task( 'cleanDist', function() {
+  return del( paths.clean.dist );
+});
+
+gulp.task( 'img', function() {
+  return gulp.src( paths.img.src )
+    .pipe( imagemin( { use: [ pngquant() ] } ) )
+    .pipe( gulp.dest( paths.img.dest ) );
+});
+
+gulp.task( 'dist', function() {
+  var cssDist = gulp.src( paths.dist.css.src )
+      .pipe( gulp.dest( paths.dist.css.dest ) );
+  var jsDist = gulp.src( paths.dist.js.src )
+      .pipe( gulp.dest( paths.dist.js.dest ) );
+  var libsDist = gulp.src( paths.dist.libs.src )
+      .pipe( gulp.dest( paths.dist.libs.dest ) );
+  return cssDist, jsDist, libsDist;
+});
+
+gulp.task( 'build', gulp.parallel( 'cleanApp', 'html', 'css', 'js' ) );
+
+gulp.task( 'libs', gulp.parallel( 'jquery', 'bootstrap', 'fontAwesome', 'animateCSS', 'wow', 'parallaxJS', 'pageScroll2ID' ) );
+
+gulp.task( 'public', gulp.series( 'cleanDist', 'img', 'dist' ) );
+
+gulp.task( 'default', gulp.series( 'build', 'libs', 'serve' ) );

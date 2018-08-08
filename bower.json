@@ -1,24 +1,26 @@
 {
-  "name": "shop",
+  "name": "mikorn-project",
   "description": "",
-  "main": "index.js",
+  "main": "gulpfile.js",
   "authors": [
     "mikorn <info@webmikorn.ru>"
   ],
   "license": "ISC",
-  "homepage": "",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "src/vendor",
+    "app/assets/libs",
     "test",
     "tests"
   ],
   "devDependencies": {
     "jquery": "^3.2.1",
-    "normalize-css": "normalize.css#^6.0.0",
-    "bootstrap": "^3.3.7",
-    "font-awesome": "^4.7.0"
+    "font-awesome": "^5.0.10",
+    "bootstrap": "^4.1.2",
+    "wow": "^1.1.2",
+    "animate.css": "^3.7.0",
+    "parallax.js": "^1.5.0",
+    "page-scroll-to-id": "^1.5.8"
   }
 }
