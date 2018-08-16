@@ -1,0 +1,31 @@
+extends ../layouts/default.pug
+
+block site-content
+    section.page.mt-3
+        .container
+            .page-header.mb-4
+                h1.page-title.font-weight-normal.text-center
+                    | Contacts
+                .page-subtitle.lead.text-center.text-info
+                    | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, iure?
+            .page-content
+                form#feadback(method='POST')
+                    .input-group.mb-3
+                        .input-group-prepend
+                            span.input-group-text
+                                i.fas.fa-user
+                        input.form-control(type='text', placeholder='Name')
+                    .input-group.mb-3
+                        .input-group-prepend
+                            span.input-group-text
+                                i.fas.fa-envelope
+                        input.form-control(type='email', placeholder='E-mail')
+                    .input-group.mb-3
+                        .input-group-prepend
+                            span.input-group-text
+                                i.fab.fa-skype
+                        input.form-control(type='text', placeholder='Skype')
+                    .input-group.mb-3
+                        textarea.form-control(rows='5', placeholder='Comments')
+                    button.btn.btn-info(type='submit')
+                        | Submit

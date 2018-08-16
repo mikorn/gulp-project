@@ -76,8 +76,7 @@ var paths = {
             },
             fontAwesome: {
                 src: [
-                    './app/bower_components/font-awesome/web-fonts-with-css/css',
-                    './app/bower_components/font-awesome/web-fonts-with-css/webfonts',
+                    './app/bower_components/font-awesome/web-fonts-with-css/**/*.*',
                     './app/bower_components/font-awesome/LICENSE.txt',
                 ],
                 dest: './app/libs/font-awesome'

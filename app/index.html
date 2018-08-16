@@ -13,13 +13,86 @@
   <body class="bg-light h-100">
     <div class="site mx-auto d-flex flex-column h-100 w-100 position-relative">
       <header class="site-header header">
-        <h2>Header</h2>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light"><a class="navbar-brand" href="http://localhost:3000"><img src="assets/images/logo/logo.png" alt="Logo"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active"><a class="nav-link" href="http://localhost:3000">Home<span class="sr-only">(current)</span></a></li>
+              <li class="nav-item"><a class="nav-link" href="solutions.html">Solutions</a></li>
+              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown"><a class="dropdown-item" href="page.html">Page 1</a><a class="dropdown-item" href="page.html">Page 2</a></div>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="contacts.html">Contacts</a></li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+              <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+        </nav>
       </header>
       <div class="site-content flex-grow-1 flex-shrink-0">
-        <h1>Hello, World!</h1>
+        <div class="container">
+          <div class="jumbotron mt-5">
+            <h1 class="display-4">Hello, world!</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4">
+            <p>It uses utility classes for typography and spacing to space content out within the larger container.</p><a class="btn btn-info btn-lg" href="https://webmikorn.ru/articles/opyit-sborki-proekta-gulp/" role="button" target="_blank">Learn more</a>
+          </div>
+          <section class="section technology py-5 mt-4">
+            <div class="container">
+              <div class="wp-section-header d-flex justify-content-center align-items-center mb-4">
+                <div class="section-shape"></div>
+                <h2 class="section-title text-center font-weight-normal">Тechnologies</h2>
+              </div>
+              <div class="section-content mb-5 mt-4 pt-2 bd-highlight">
+                <div class="row align-items-end">
+                  <div class="col-6 col-sm-4 col-lg-2">
+                    <section class="card bg-light border-0 mb-3 h-100"><a href="https://nodejs.org" target="_blank"><img class="card-img card-img d-block w-75 mx-auto" src="assets/images/technology/nodejs.png" alt="Node.js">
+                        <div class="card-header bg-light border-0">
+                          <h3 class="card-title lead font-weight-normal text-center mt-2 mb-0 text-muted">Node.js</h3>
+                        </div></a></section>
+                  </div>
+                  <div class="col-6 col-sm-4 col-lg-2">
+                    <section class="card bg-light border-0 mb-3 h-100"><a href="https://gulpjs.com" target="_blank"><img class="card-img d-block w-50 mx-auto" src="assets/images/technology/gulp.png" alt="Gulp">
+                        <div class="card-header bg-light border-0">
+                          <h3 class="card-title lead font-weight-normal text-center mt-2 mb-0 text-muted">Gulp</h3>
+                        </div></a></section>
+                  </div>
+                  <div class="col-6 col-sm-4 col-lg-2">
+                    <section class="card bg-light border-0 mb-3 h-100"><a href="https://git-scm.com" target="_blank"><img class="card-img d-block w-75 mx-auto" src="assets/images/technology/git.png" alt="Git">
+                        <div class="card-header bg-light border-0">
+                          <h3 class="card-title lead font-weight-normal text-center mt-2 mb-0 text-muted">Git</h3>
+                        </div></a></section>
+                  </div>
+                  <div class="col-6 col-sm-4 col-lg-2">
+                    <section class="card bg-light border-0 mb-3 h-100"><a href="https://bower.io" target="_blank"><img class="card-img d-block w-75 mx-auto" src="assets/images/technology/bower.png" alt="Bower">
+                        <div class="card-header bg-light border-0">
+                          <h3 class="card-title lead font-weight-normal text-center mt-2 mb-0 text-muted">Bower</h3>
+                        </div></a></section>
+                  </div>
+                  <div class="col-6 col-sm-4 col-lg-2">
+                    <section class="card bg-light border-0 mb-3 h-100"><a href="https://pugjs.org" target="_blank"><img class="card-img d-block w-75 mx-auto" src="assets/images/technology/pug.png" alt="Pug">
+                        <div class="card-header bg-light border-0">
+                          <h3 class="card-title lead font-weight-normal text-center mt-2 mb-0 text-muted">Pug</h3>
+                        </div></a></section>
+                  </div>
+                  <div class="col-6 col-sm-4 col-lg-2">
+                    <section class="card bg-light border-0 mb-3 h-100"><a href="http://stylus-lang.com" target="_blank"><img class="card-img d-block w-75 mx-auto" src="assets/images/technology/stylus.png" alt="Stylus">
+                        <div class="card-header bg-light border-0">
+                          <h3 class="card-title lead font-weight-normal text-center mt-2 mb-0 text-muted">Stylus</h3>
+                        </div></a></section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
-      <footer class="flex-grow-0 flex-shrink-0 bg-dark">
-        <h2 class="text-light">Footer</h2>
+      <footer class="site-footer footer flex-grow-0 flex-shrink-0 bg-dark">
+        <div class="container">
+          <div class="social py-3"><a class="text-white mr-3" href="https://github.com/mikorn" target="_blank"><i class="fab fa-github h4"></i></a><a class="text-white mr-3" href="https://www.facebook.com/webmikorn/" target="_blank"><i class="fab fa-facebook-f h4"></i></a><a class="text-white mr-3" href="https://vk.com/webmikorn" target="_blank"><i class="fab fa-vk h4"></i></a><a class="text-white mr-3" href="https://twitter.com/Webmikorn" target="_blank"><i class="fab fa-twitter h4"></i></a><a class="text-white" href="https://www.youtube.com/c/WebmikornRus" target="_blank"><i class="fab fa-youtube h4"></i></a></div>
+        </div>
       </footer>
     </div>
     <script src="libs/jquery/jquery.min.js"></script>
