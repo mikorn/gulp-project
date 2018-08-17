@@ -9,23 +9,73 @@ block site-content
                 .page-subtitle.lead.text-center.text-info
                     | Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, iure?
             .page-content
-                form#feadback(method='POST')
-                    .input-group.mb-3
-                        .input-group-prepend
-                            span.input-group-text
-                                i.fas.fa-user
-                        input.form-control(type='text', placeholder='Name')
-                    .input-group.mb-3
-                        .input-group-prepend
-                            span.input-group-text
-                                i.fas.fa-envelope
-                        input.form-control(type='email', placeholder='E-mail')
-                    .input-group.mb-3
-                        .input-group-prepend
-                            span.input-group-text
-                                i.fab.fa-skype
-                        input.form-control(type='text', placeholder='Skype')
-                    .input-group.mb-3
-                        textarea.form-control(rows='5', placeholder='Comments')
-                    button.btn.btn-info(type='submit')
-                        | Submit
+                .row
+                    .col-md-6.col-lg-4
+                        .card.px-3.pt-3.mb-5.bg-light
+                            address
+                                strong
+                                    | Organization name
+                                br
+                                | Ivanova str., 17
+                                br
+                                | Moscow
+                                br
+                                | Russian Federation, 123456
+                                br
+                                a(href='mailto:example@example.com')
+                                    | example@example.com
+                    .col-md-6.col-lg-8
+                        iframe(src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d577336.7642059308!2d36.82512580492329!3d55.58074806111345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54afc73d4b0c9%3A0x3d44d6cc5757cf4c!2z0JzQvtGB0LrQstCw!5e0!3m2!1sru!2sru!4v1534497550466', width='100%', height='350', frameborder='0', style='border:0', allowfullscreen='')
+                .card.mt-5
+                    .card-header.bg-dark
+                        h2.card-title.h5.font-weight-normal.my-0.text-light
+                            | Form title
+                    .card-body.bg-light
+                        form
+                            .form-row
+                                .col-md
+                                    .input-group.mb-3
+                                        .input-group-prepend
+                                            span.input-group-text
+                                                i.fas.fa-user
+                                        input.form-control(type='text', placeholder='User', required)
+                                    .input-group.mb-3
+                                        .input-group-prepend
+                                            span.input-group-text
+                                                i.fas.fa-envelope
+                                        input.form-control(type='email', placeholder='E-mail', required)
+                                    .input-group.mb-3
+                                        .input-group-prepend
+                                            span.input-group-text
+                                                i.fas.fa-phone
+                                        input.form-control(type='phone', placeholder='Phone', required)
+                                .col-md
+                                    .input-group.mb-3
+                                        .input-group-prepend
+                                            span.input-group-text
+                                                i.fas.fa-briefcase
+                                        input.form-control(type='text', placeholder='Post')
+                                    .input-group.mb-3
+                                        .input-group-prepend
+                                            span.input-group-text
+                                                i.fas.fa-globe
+                                        select.form-control
+                                            option.selected
+                                                | Option 1
+                                            option
+                                                | Option 2
+                                            option
+                                                | Option 3
+                                            option
+                                                | Option 4
+                                            option
+                                                | Other
+                                    .input-group.mb-3
+                                        .input-group-prepend
+                                            span.input-group-text
+                                                i.fas.fa-laptop
+                                        input.form-control(type='text', placeholder='Website', required)
+                            .input-group.mb-3
+                                textarea.form-control(rows='5', placeholder='Comments')
+                            button.btn.btn-info(type='submit')
+                                | Submit
