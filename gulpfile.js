@@ -113,6 +113,10 @@ var paths = {
         dest: './dist/assets/images'
     },
     dist: {
+        html: {
+            src: './app/*.html',
+            dest: './dist'
+        },
         css: {
             src: './app/assets/css/custom.min.css',
             dest: './dist/assets/css'
@@ -222,6 +226,8 @@ gulp.task('img', function () {
 });
 
 gulp.task('dist', function () {
+    var htmlDist = gulp.src(paths.dist.html.src)
+        .pipe(gulp.dest(paths.dist.html.dest));
     var cssDist = gulp.src(paths.dist.css.src)
         .pipe(gulp.dest(paths.dist.css.dest));
     var jsDist = gulp.src(paths.dist.js.src)
@@ -230,7 +236,7 @@ gulp.task('dist', function () {
         .pipe(gulp.dest(paths.dist.fonts.dest));
     var libsDist = gulp.src(paths.dist.libs.src)
         .pipe(gulp.dest(paths.dist.libs.dest));
-    return cssDist, jsDist, fontsDist, libsDist;
+    return htmlDist, cssDist, jsDist, fontsDist, libsDist;
 });
 
 gulp.task('build', gulp.parallel('cleanApp', 'html', 'css', 'js'));

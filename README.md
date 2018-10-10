@@ -3,7 +3,7 @@
 <h2>Description</h2>
 <p>In this repository there is a template for website development with Gulp.</p>
 <p>In the template to use Pug and Stylus preprocessors.</p>
-<p>Detailed description in <a href="https://webmikorn.ru/articles/opyit-sborki-proekta-gulp/">article</a> (russian language).</p>
+<p>Detailed description in <a href="https://webmikorn.ru/gulp-project/">article</a> (russian language).</p>
 <h2>Requirements</h2>
 <ol>
   <li>Node.js.</li>
