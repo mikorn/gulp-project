@@ -2,7 +2,7 @@
 <h2>Описание</h2>
 <p>В данном репозитории находится шаблон (заготовка) для верстки сайта с помощью Gulp.</p>
 <p>В шаблоне используются препроцессоры Pug и Stylus.</p>
-<p>Подробное описание в <a href="https://webmikorn.ru/gulp-project/">статье</a>.</p>
+<p>Подробное описание в <a href="https://webmikorn.ru/articles/opyit-sborki-proekta-gulp/">статье</a>.</p>
 <h2>Требования</h2>
 <ol>
   <li>Node.js.</li>
